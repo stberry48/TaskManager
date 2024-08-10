@@ -1,28 +1,28 @@
-from flask import ( Flask,
-request
+from flask import ( 
+    Flask,
+    request
 )
 from app.database import task
-
 app = Flask(__name__)
 
 @app.get("/tasks")
 def get_all_tasks():
-    tasks_list = task.scan();
+    tasks_list = task.scan()
     out = {
         "tasks" : tasks_list,
         "ok":True
     }
-    return out;
+    return out
 
 @app.get("/tasks/<int:pk>/")
 def get_single_task(pk):
     single_task = task.select_by_id(pk)
     if single_task:
-    out = {
-        "task":single_task,
-        "ok":True
-    }
-    return out;
+        out = {
+            "task":single_task,
+            "ok":True
+        }
+        return out
 
     out= {
         "ok":False,
